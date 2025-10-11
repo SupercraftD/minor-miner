@@ -6,4 +6,4 @@ func _init():
 	super()
 	strength = 1
 	speed = 0.5
-	range = 200
+	reach = 200

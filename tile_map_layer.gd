@@ -49,8 +49,8 @@ func generate_level(start: Vector2, end: Vector2, worldData):
 		# Validate path existence
 		valid_map = _check_path_exists()
 	
-	if !valid_map:
-		push_error("Failed to generate a valid map after %d attempts" % max_generation_attempts)
+	#if !valid_map:
+		#push_error("Failed to generate a valid map after %d attempts" % max_generation_attempts)
 	
 	# Force walls on the map edges
 	if should_be_closed:
@@ -102,6 +102,7 @@ func _get_surrounding_wall_count(pos: Vector2i) -> int:
 func _create_room(center: Vector2, radius: int) -> void:
 	for x in range(-radius, radius + 1):
 		for y in range(-radius, radius + 1):
+			@warning_ignore("narrowing_conversion")
 			var pos := Vector2i(center.x + x, center.y + y)
 			if pos.x >= 0 && pos.x < map_width && pos.y >= 0 && pos.y < map_height:
 				if Vector2i(x, y).length() <= radius:
@@ -166,6 +167,7 @@ func _force_walls() -> void:
 func _apply_to_tilemap(worldData) -> Vector2:
 	var closestToCenter = Vector2i(-1,-1)
 	var closestDist = 1.0/0
+	@warning_ignore("integer_division")
 	var center = Vector2(map_width/2, map_height/2)
 	
 	for x in range(map_width):
@@ -186,6 +188,8 @@ func _apply_to_tilemap(worldData) -> Vector2:
 func generate_ores(worldData):
 	print("generating ores")
 	var tileCount = map_width * map_height
+
+	@warning_ignore("integer_division")
 	var oreParams = [
 		{"ore":Coal, "amount": tileCount / 100, "vein_min":2, "vein_max":12}
 	]

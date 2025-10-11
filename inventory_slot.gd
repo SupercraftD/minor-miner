@@ -1,4 +1,6 @@
-extends Control
+class_name InventoryUISlot extends Control
+
+var pos = Vector2i(-1,-1)
 
 func setCount(count):
 	$Label.text = str(count)

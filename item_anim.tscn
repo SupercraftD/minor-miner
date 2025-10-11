@@ -3,21 +3,6 @@
 [ext_resource type="Texture2D" uid="uid://bubr3q4c318hl" path="res://assets/spoon.png" id="1_1vnyn"]
 [ext_resource type="Script" uid="uid://dqlvkx421ua18" path="res://item_anim.gd" id="2_1finq"]
 
-[sub_resource type="Animation" id="Animation_1vnyn"]
-resource_name = "use"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:rotation")
-tracks/0/interp = 4
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1.4640808, 1.4640808),
-"update": 0,
-"values": [0.0, 1.5837888]
-}
-
 [sub_resource type="Animation" id="Animation_1finq"]
 length = 0.001
 tracks/0/type = "value"
@@ -31,6 +16,21 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_1vnyn"]
+resource_name = "use"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1.4640808, 1.4640808),
+"update": 0,
+"values": [0.0, 1.5837888]
 }
 
 [sub_resource type="Animation" id="Animation_vogk7"]

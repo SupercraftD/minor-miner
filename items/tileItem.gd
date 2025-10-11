@@ -1,6 +1,6 @@
 class_name TileItem extends Item
 
-var range = 300
+var reach = 300
 var speed = 0.25
 
 var icon
@@ -12,7 +12,7 @@ func _init(pType):
 
 func use(mouseLoc : Vector2, player : Player, world : World):
 	
-	if player.global_position.distance_to(mouseLoc) > range:
+	if player.global_position.distance_to(mouseLoc) > reach:
 		return 0
 	
 	var pos = world.tilemap.local_to_map(mouseLoc)

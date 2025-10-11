@@ -1,8 +1,9 @@
 class_name Player extends CharacterBody2D
 
 
-const SPEED = 300.0
-const JUMP_VELOCITY = -150.0
+var SPEED = 300.0
+var JUMP_VELOCITY = -125.0
+var maxJump = 600.0
 var appliedJump = 0.0
 
 var inventory = []
@@ -31,7 +32,7 @@ func movement(delta):
 	if Input.is_action_pressed("jump") and is_on_floor():
 		appliedJump += JUMP_VELOCITY
 
-	if (!Input.is_action_pressed("jump") or abs(appliedJump)>650) and appliedJump!=0 and is_on_floor():
+	if (!Input.is_action_pressed("jump") or abs(appliedJump)>maxJump) and appliedJump!=0 and is_on_floor():
 		velocity.y = appliedJump
 		appliedJump = 0
 	
@@ -50,7 +51,7 @@ func movement(delta):
 var usageDb = false
 
 func useItem():
-	if Input.is_action_pressed("Use") and not usageDb:
+	if Input.is_action_pressed("Use") and not usageDb and not $CanvasLayer/Inventory.hoveringInventory():
 		usageDb = true
 		
 		if inventory[0][hotbarslot] != null:
@@ -77,8 +78,9 @@ func useItemAnimation(db, item):
 	
 	await a.play(item, db*0.75)
 
-func handleHotbar():
+func handleInventory():
 	
+	#HOTBAR
 	for i in range(1,10):
 		if Input.is_action_just_pressed(str(i)):
 			hotbarslot = i-1
@@ -92,10 +94,17 @@ func handleHotbar():
 		if hotbarslot <0:
 			hotbarslot = 8
 		$CanvasLayer/Inventory.updateSlots(inventory, hotbarslot)
+	
+	#INVENTORY
+	if Input.is_action_just_pressed("Inventory"):
+		$CanvasLayer/Inventory.toggleInventory()
+		$CanvasLayer/Inventory.updateSlots(inventory, hotbarslot)
+	
+	
 
 func _physics_process(delta):
 	movement(delta)
-	handleHotbar()
+	handleInventory()
 	useItem()
 
 func addItem(type, tileItem):

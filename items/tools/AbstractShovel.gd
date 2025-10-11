@@ -2,7 +2,7 @@ class_name AbstractShovel extends Item
 
 var strength : int
 var speed : float
-var range : float
+var reach : float
 
 func _init():
 	type = "Shovel"
@@ -10,7 +10,7 @@ func _init():
 
 ##returns debounce time to next usage
 func use(mouseLoc : Vector2, player : Player, world : World):
-	if player.global_position.distance_to(mouseLoc) > range:
+	if player.global_position.distance_to(mouseLoc) > reach:
 		return 0
 	
 	var pos = world.tilemap.local_to_map(mouseLoc)
@@ -36,7 +36,7 @@ func use(mouseLoc : Vector2, player : Player, world : World):
 		if (cell.mods.has("crack")):
 			cell.mods.crack.destroy()
 		
-		var drop : DroppedItem = DroppedItem.new(cell.type, world, mouseLoc, true)
+		DroppedItem.new(cell.type, world, mouseLoc, true)
 		world.setTile(pos, "Air")
 	
 	return speed
