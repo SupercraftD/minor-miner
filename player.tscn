@@ -1,0 +1,152 @@
+[gd_scene load_steps=8 format=3 uid="uid://cjwes3lavbpmv"]
+
+[ext_resource type="Texture2D" uid="uid://c464nds1ix22y" path="res://assets/minor.png" id="1_4flbx"]
+[ext_resource type="Script" uid="uid://dw8xbh647pwoy" path="res://player.gd" id="1_onrkg"]
+[ext_resource type="Script" uid="uid://d1mp13yuw1cd3" path="res://inventory.gd" id="3_hqtel"]
+[ext_resource type="PackedScene" uid="uid://bf67u0hyeopqs" path="res://inventory_slot.tscn" id="3_i3pqv"]
+[ext_resource type="PackedScene" uid="uid://4kus2qtrki6m" path="res://item_anim.tscn" id="5_sweqy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
+size = Vector2(48, 60)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_onrkg"]
+bg_color = Color(0.3019608, 0.43529412, 0.6, 0.5647059)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
+script = ExtResource("1_onrkg")
+
+[node name="Minor" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(4, 4)
+texture = ExtResource("1_4flbx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_onrkg")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Inventory" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3_hqtel")
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Inventory"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 23.0
+offset_right = 662.0
+offset_bottom = 93.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_onrkg")
+
+[node name="0" type="HBoxContainer" parent="CanvasLayer/Inventory/Panel"]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 13.0
+offset_right = 625.0
+offset_bottom = 68.0
+theme_override_constants/separation = 10
+
+[node name="0" parent="CanvasLayer/Inventory/Panel/0" instance=ExtResource("3_i3pqv")]
+layout_mode = 2
+
+[node name="1" parent="CanvasLayer/Inventory/Panel/0" instance=ExtResource("3_i3pqv")]
+layout_mode = 2
+
+[node name="2" parent="CanvasLayer/Inventory/Panel/0" instance=ExtResource("3_i3pqv")]
+layout_mode = 2
+
+[node name="3" parent="CanvasLayer/Inventory/Panel/0" instance=ExtResource("3_i3pqv")]
+layout_mode = 2
+
+[node name="4" parent="CanvasLayer/Inventory/Panel/0" instance=ExtResource("3_i3pqv")]
+layout_mode = 2
+
+[node name="5" parent="CanvasLayer/Inventory/Panel/0" instance=ExtResource("3_i3pqv")]
+layout_mode = 2
+
+[node name="6" parent="CanvasLayer/Inventory/Panel/0" instance=ExtResource("3_i3pqv")]
+layout_mode = 2
+
+[node name="7" parent="CanvasLayer/Inventory/Panel/0" instance=ExtResource("3_i3pqv")]
+layout_mode = 2
+
+[node name="8" parent="CanvasLayer/Inventory/Panel/0" instance=ExtResource("3_i3pqv")]
+layout_mode = 2
+
+[node name="HotbarLabels" type="HBoxContainer" parent="CanvasLayer/Inventory/Panel"]
+layout_mode = 0
+offset_left = 13.0
+offset_top = -3.0
+offset_right = 625.0
+offset_bottom = 27.0
+theme_override_constants/separation = 57
+
+[node name="Label" type="Label" parent="CanvasLayer/Inventory/Panel/HotbarLabels"]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 21
+text = "1"
+
+[node name="Label2" type="Label" parent="CanvasLayer/Inventory/Panel/HotbarLabels"]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 21
+text = "2"
+
+[node name="Label3" type="Label" parent="CanvasLayer/Inventory/Panel/HotbarLabels"]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 21
+text = "3"
+
+[node name="Label4" type="Label" parent="CanvasLayer/Inventory/Panel/HotbarLabels"]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 21
+text = "4"
+
+[node name="Label5" type="Label" parent="CanvasLayer/Inventory/Panel/HotbarLabels"]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 21
+text = "5"
+
+[node name="Label6" type="Label" parent="CanvasLayer/Inventory/Panel/HotbarLabels"]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 21
+text = "6"
+
+[node name="Label7" type="Label" parent="CanvasLayer/Inventory/Panel/HotbarLabels"]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 21
+text = "7"
+
+[node name="Label8" type="Label" parent="CanvasLayer/Inventory/Panel/HotbarLabels"]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 21
+text = "8"
+
+[node name="Label9" type="Label" parent="CanvasLayer/Inventory/Panel/HotbarLabels"]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 21
+text = "9"
+
+[node name="ItemAnimRight" parent="." instance=ExtResource("5_sweqy")]
+position = Vector2(24, -2)
+
+[node name="ItemAnimLeft" parent="." instance=ExtResource("5_sweqy")]
+position = Vector2(-24, -2)
+left = true

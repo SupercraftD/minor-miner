@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://cms4gnlky4wx5"]
+
+[ext_resource type="Texture2D" uid="uid://buixaeg512c7b" path="res://assets/crack1.png" id="1_ncjug"]
+[ext_resource type="Texture2D" uid="uid://ba8cros71hbir" path="res://assets/crack2.png" id="2_aar4c"]
+[ext_resource type="Texture2D" uid="uid://bp15kj8jro4tf" path="res://assets/crack3.png" id="3_dl4tx"]
+
+[node name="CrackOverlay" type="Node2D"]
+z_index = 1
+texture_filter = 1
+
+[node name="Crack1" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(2, 2)
+texture = ExtResource("1_ncjug")
+
+[node name="Crack2" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(2, 2)
+texture = ExtResource("2_aar4c")
+
+[node name="Crack3" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(2, 2)
+texture = ExtResource("3_dl4tx")

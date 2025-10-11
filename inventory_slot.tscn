@@ -1,0 +1,66 @@
+[gd_scene load_steps=5 format=3 uid="uid://bf67u0hyeopqs"]
+
+[ext_resource type="Texture2D" uid="uid://cd1eniu4l38ie" path="res://assets/stone.png" id="1_42eed"]
+[ext_resource type="Script" uid="uid://20kuvc3fbwpi" path="res://inventory_slot.gd" id="1_f5bh6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jy1q7"]
+bg_color = Color(0.5045961, 0.723413, 0.734375, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f5bh6"]
+bg_color = Color(0.9007565, 1, 0.7566811, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[node name="InventorySlot" type="Control"]
+custom_minimum_size = Vector2(59, 55)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -20.0
+offset_right = -1130.0
+offset_bottom = -626.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_f5bh6")
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(59, 55)
+layout_mode = 0
+offset_left = -10.0
+offset_top = -7.0
+offset_right = 49.0
+offset_bottom = 48.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_jy1q7")
+
+[node name="Panel2" type="Panel" parent="."]
+visible = false
+custom_minimum_size = Vector2(59, 55)
+layout_mode = 0
+offset_left = -10.0
+offset_top = -7.0
+offset_right = 49.0
+offset_bottom = 48.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_f5bh6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(20, 20)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_42eed")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 22.0
+offset_right = 50.0
+offset_bottom = 50.0
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 2
