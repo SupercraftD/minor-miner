@@ -253,6 +253,9 @@ theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 21
 text = "9"
 
+[node name="InventorySlot" parent="CanvasLayer" instance=ExtResource("3_i3pqv")]
+transparentbg = true
+
 [node name="ItemAnimRight" parent="." instance=ExtResource("5_sweqy")]
 position = Vector2(24, -2)
 

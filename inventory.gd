@@ -1,17 +1,8 @@
 extends Control
 
-var hoveringSlot = Vector2i(-1,-1)
-
-func attach(node):
-	if node is InventoryUISlot:
-		node.mouse_entered.connect(func():hoveringSlot = node.pos)
-		node.mouse_exited.connect(func():hoveringSlot = Vector2i(-1,-1))
-	else:
-		for i in node.get_children():
-			attach(i)
+var invOpen = false
 
 func _ready():
-	attach(self)
 	for row in range(4):
 		for col in range(9):
 			var slot = $Panel/VBoxContainer.get_node(str(row)+"/"+str(col))
@@ -42,7 +33,16 @@ func hoveringInventory():
 		($Panel/Panel2.visible and Rect2($Panel/Panel2.global_position, $Panel/Panel2.size).has_point(get_local_mouse_position()))
 
 func toggleInventory():
+	invOpen = not invOpen
 	$Panel/Panel2.visible = not $Panel/Panel2.visible
 	for i in $Panel/VBoxContainer.get_children():
 		if i.name=="0":continue
 		i.visible = not i.visible
+
+func getHoveringSlot():
+	for row in range(4):
+		for col in range(9):
+			var slot = $Panel/VBoxContainer.get_node(str(row)+"/"+str(col))
+			if Rect2(slot.global_position, slot.size).has_point(get_viewport().get_mouse_position()):
+				return Vector2i(row,col)
+	return Vector2i(-1,-1)

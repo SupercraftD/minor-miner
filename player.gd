@@ -8,6 +8,7 @@ var appliedJump = 0.0
 
 var inventory = []
 var hotbarslot = 0
+var selectedItem = null
 
 func _ready():
 	
@@ -54,22 +55,42 @@ func useItem():
 	if Input.is_action_pressed("Use") and not usageDb and not $CanvasLayer/Inventory.hoveringInventory():
 		usageDb = true
 		
-		if inventory[0][hotbarslot] != null:
-			var db = inventory[0][hotbarslot].item.use(get_global_mouse_position(), self, get_parent())
+		var using = inventory[0][hotbarslot]
+		if $CanvasLayer/Inventory.invOpen and selectedItem != null:
+			using = selectedItem
+		
+		if using != null:
+			var db = using.item.use(get_global_mouse_position(), self, get_parent())
 			
 			if (db != 0):
-				useItemAnimation(db, inventory[0][hotbarslot].item)
+				useItemAnimation(db, using.item)
 
-			if inventory[0][hotbarslot].item.consumable and db!=0:
-				inventory[0][hotbarslot].count -= 1
+			if using.item.consumable and db!=0:
+				using.count -= 1
 				
-				if inventory[0][hotbarslot].count <= 0:
-					inventory[0][hotbarslot] = null
+				if using.count <=0:
+					if using == selectedItem:
+						selectedItem = null
+					else:
+						inventory[0][hotbarslot] = null
 				$CanvasLayer/Inventory.updateSlots(inventory, hotbarslot)
 			
 			
 			await get_tree().create_timer(db).timeout
 		usageDb = false
+	
+	elif Input.is_action_just_pressed("Use") and $CanvasLayer/Inventory.invOpen:
+		
+		var slotpos = $CanvasLayer/Inventory.getHoveringSlot()
+		
+		print(slotpos)
+		
+		if slotpos != Vector2i(-1,-1):
+			var temp = inventory[slotpos.x][slotpos.y]
+			inventory[slotpos.x][slotpos.y] = selectedItem
+			selectedItem = temp
+			print(selectedItem)
+		$CanvasLayer/Inventory.updateSlots(inventory, hotbarslot)
 
 func useItemAnimation(db, item):
 	var a = $ItemAnimRight
@@ -100,6 +121,12 @@ func handleInventory():
 		$CanvasLayer/Inventory.toggleInventory()
 		$CanvasLayer/Inventory.updateSlots(inventory, hotbarslot)
 	
+	if selectedItem != null:
+		$CanvasLayer/InventorySlot.setItem(selectedItem.item.icon)
+		$CanvasLayer/InventorySlot.setCount(selectedItem.count)
+	else:
+		$CanvasLayer/InventorySlot.clear()
+	$CanvasLayer/InventorySlot.position = get_viewport().get_mouse_position()
 	
 
 func _physics_process(delta):
