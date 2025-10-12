@@ -5,12 +5,14 @@ var typeToTile = {
 	"Air":Air,
 	"Coal":Coal,
 	"Copper":Copper,
-	"Furnace":Furnace
+	"Furnace":Furnace,
+	"Copper Anvil":CopperAnvil
 }
 
 var typeToItem = {
-	"BasicShovel":BasicShovel,
-	"Copper Ingot":CopperIngot
+	"Basic Shovel":BasicShovel,
+	"Copper Ingot":CopperIngot,
+	"Copper Shovel":CopperShovel
 }
 
 var craftingRecipes = {
@@ -39,4 +41,29 @@ var craftingRecipes = {
 		"station":"Furnace",
 		"count":1
 	},
+	"Copper Anvil":{
+		"tileItem":true,
+		"requires":[
+			{"type":"Copper Ingot",
+			"count":5,
+			"tileItem":false},
+			{"type":"Stone",
+			"count":10,
+			"tileItem":true},
+		],
+		"station":"",
+		"count":1
+	},
+	"Copper Shovel":{
+		"tileItem":false,
+		"requires":[
+			{
+				"type":"Copper Ingot",
+				"count":7,
+				"tileItem":false
+			}
+		],
+		"station":"Copper Anvil",
+		"count":1
+	}
 }

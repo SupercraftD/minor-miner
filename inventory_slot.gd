@@ -28,6 +28,6 @@ func _process(delta):
 	if Rect2(global_position, size).has_point(get_viewport().get_mouse_position()) and type != "":
 		$nametooltip.visible = true
 		$nametooltip.text = type
-		$nametooltip.global_position = get_global_mouse_position()
+		$nametooltip.global_position = get_global_mouse_position() + Vector2(15,0)
 	else:
 		$nametooltip.visible = false

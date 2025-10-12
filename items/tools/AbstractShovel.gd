@@ -28,7 +28,7 @@ func use(mouseLoc : Vector2, player : Player, world : World):
 		cell.mods.crack = CrackOverlay.new(world.tilemap.map_to_local(pos), world)
 	crack = cell.mods.crack
 	
-	var lvl = 4 - (int((float(cell.dur)/cell.maxDur)*3) + 1)
+	var lvl = 4 - (int((float(cell.dur if cell.dur>=0 else 0)/cell.maxDur)*3) + 1)
 	crack.setCrack(lvl)
 	
 	#MINE BLOCK LOGIC

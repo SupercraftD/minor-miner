@@ -65,6 +65,22 @@ func refreshMenu():
 			if $Panel/Grid/GridContainer.get_child(i).type == selectedRecipe:
 				selectRecipe(i)
 
+func wouldShow():
+	var availableToCraft = []
+	
+	for i in GlobalData.craftingRecipes:
+		if $Panel/filter.text.to_lower() in i.to_lower() or $Panel/filter.text == "":
+			
+			if $Panel/CheckBox.button_pressed:
+				availableToCraft.push_back(i)
+			else:
+				
+				var craftable = canCraft(i)
+					
+				if craftable:
+					availableToCraft.push_back(i)
+	
+	return availableToCraft
 
 func canCraft(i):
 	var indexInv = {}
@@ -159,7 +175,8 @@ func selectRecipe(idx):
 		$Panel/Label2/InventorySlot.clear()
 
 func _process(_delta):
-	refreshMenu()
+	if shownRecipes.hash() != wouldShow().hash():
+		refreshMenu()
 	
 	if selectedRecipe !="" and canCraft(selectedRecipe):
 		$Panel/Button.disabled = false
