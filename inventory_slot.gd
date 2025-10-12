@@ -1,6 +1,7 @@
 class_name InventoryUISlot extends Control
 
 @export var transparentbg = false
+var type : String = ""
 
 var pos = Vector2i(-1,-1)
 
@@ -17,7 +18,16 @@ func setItem(tex):
 
 func clear():
 	$Label.text = ""
+	type = ""
 	$Sprite2D.texture = null
 
 func setHighlight(hl):
 	$Panel2.visible = hl
+
+func _process(delta):
+	if Rect2(global_position, size).has_point(get_viewport().get_mouse_position()) and type != "":
+		$nametooltip.visible = true
+		$nametooltip.text = type
+		$nametooltip.global_position = get_global_mouse_position()
+	else:
+		$nametooltip.visible = false

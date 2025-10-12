@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://cjwes3lavbpmv"]
+[gd_scene load_steps=10 format=3 uid="uid://cjwes3lavbpmv"]
 
 [ext_resource type="Texture2D" uid="uid://c464nds1ix22y" path="res://assets/minor.png" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://dw8xbh647pwoy" path="res://player.gd" id="1_onrkg"]
 [ext_resource type="Script" uid="uid://d1mp13yuw1cd3" path="res://inventory.gd" id="3_hqtel"]
 [ext_resource type="PackedScene" uid="uid://bf67u0hyeopqs" path="res://inventory_slot.tscn" id="3_i3pqv"]
+[ext_resource type="Script" uid="uid://b0g8c401pr5rg" path="res://crafting.gd" id="5_2hs0m"]
 [ext_resource type="PackedScene" uid="uid://4kus2qtrki6m" path="res://item_anim.tscn" id="5_sweqy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
@@ -11,6 +12,13 @@ size = Vector2(48, 60)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_onrkg"]
 bg_color = Color(0.3019608, 0.43529412, 0.6, 0.5647059)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sweqy"]
+bg_color = Color(0.5905564, 0.6, 0.47001165, 1)
 corner_radius_top_left = 25
 corner_radius_top_right = 25
 corner_radius_bottom_right = 25
@@ -58,10 +66,10 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_onrkg")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Inventory/Panel"]
 layout_mode = 0
-offset_left = 23.0
-offset_top = 14.0
-offset_right = 634.0
-offset_bottom = 69.0
+offset_left = 8.0
+offset_top = 9.0
+offset_right = 619.0
+offset_bottom = 253.0
 theme_override_constants/separation = 8
 
 [node name="0" type="HBoxContainer" parent="CanvasLayer/Inventory/Panel/VBoxContainer"]
@@ -254,7 +262,112 @@ theme_override_font_sizes/font_size = 21
 text = "9"
 
 [node name="InventorySlot" parent="CanvasLayer" instance=ExtResource("3_i3pqv")]
+offset_left = 20.0
+offset_top = 124.0
+offset_right = -1073.0
+offset_bottom = -469.0
 transparentbg = true
+
+[node name="Crafting" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 710.0
+offset_top = 10.0
+offset_right = 750.0
+offset_bottom = 50.0
+script = ExtResource("5_2hs0m")
+
+[node name="Button" type="Button" parent="CanvasLayer/Crafting"]
+layout_mode = 0
+offset_left = 139.0
+offset_top = 11.0
+offset_right = 224.0
+offset_bottom = 42.0
+focus_mode = 0
+text = "Crafting"
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Crafting"]
+visible = false
+layout_mode = 0
+offset_left = -44.0
+offset_top = 48.0
+offset_right = 411.0
+offset_bottom = 590.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_sweqy")
+
+[node name="Grid" type="ScrollContainer" parent="CanvasLayer/Crafting/Panel"]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 47.0
+offset_right = 432.0
+offset_bottom = 364.0
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/Crafting/Panel/Grid"]
+layout_mode = 2
+theme_override_constants/h_separation = 11
+theme_override_constants/v_separation = 11
+columns = 6
+
+[node name="Label" type="Label" parent="CanvasLayer/Crafting/Panel"]
+layout_mode = 0
+offset_left = 182.0
+offset_top = 385.0
+offset_right = 255.0
+offset_bottom = 408.0
+text = "Requires:"
+
+[node name="CheckBox" type="CheckBox" parent="CanvasLayer/Crafting/Panel"]
+layout_mode = 0
+offset_top = 353.0
+offset_right = 239.0
+offset_bottom = 384.0
+focus_mode = 0
+text = "Include uncraftable recipes"
+
+[node name="Requires" type="ScrollContainer" parent="CanvasLayer/Crafting/Panel"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 420.0
+offset_right = 438.0
+offset_bottom = 476.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Crafting/Panel/Requires"]
+custom_minimum_size = Vector2(423, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="Button" type="Button" parent="CanvasLayer/Crafting/Panel"]
+layout_mode = 0
+offset_left = 288.0
+offset_top = 490.0
+offset_right = 360.0
+offset_bottom = 527.0
+focus_mode = 0
+disabled = true
+text = "Craft"
+
+[node name="filter" type="LineEdit" parent="CanvasLayer/Crafting/Panel"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 12.0
+offset_right = 414.0
+offset_bottom = 43.0
+placeholder_text = "filter"
+
+[node name="Label2" type="Label" parent="CanvasLayer/Crafting/Panel"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 495.0
+offset_right = 79.0
+offset_bottom = 518.0
+text = "Station:"
+
+[node name="InventorySlot" parent="CanvasLayer/Crafting/Panel/Label2" instance=ExtResource("3_i3pqv")]
+layout_mode = 1
+offset_left = 68.0
+offset_top = -14.0
+offset_right = 67.0
+offset_bottom = 18.0
 
 [node name="ItemAnimRight" parent="." instance=ExtResource("5_sweqy")]
 position = Vector2(24, -2)
@@ -262,3 +375,8 @@ position = Vector2(24, -2)
 [node name="ItemAnimLeft" parent="." instance=ExtResource("5_sweqy")]
 position = Vector2(-24, -2)
 left = true
+
+[connection signal="pressed" from="CanvasLayer/Crafting/Button" to="CanvasLayer/Crafting" method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Crafting/Panel/CheckBox" to="CanvasLayer/Crafting" method="_on_check_box_pressed"]
+[connection signal="pressed" from="CanvasLayer/Crafting/Panel/Button" to="CanvasLayer/Crafting" method="_on_craft_pressed"]
+[connection signal="text_changed" from="CanvasLayer/Crafting/Panel/filter" to="CanvasLayer/Crafting" method="_on_filter_text_changed"]

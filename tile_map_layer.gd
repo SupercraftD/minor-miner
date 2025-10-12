@@ -191,7 +191,8 @@ func generate_ores(worldData):
 
 	@warning_ignore("integer_division")
 	var oreParams = [
-		{"ore":Coal, "amount": tileCount / 100, "vein_min":2, "vein_max":12}
+		{"ore":Coal, "amount": tileCount / 100, "vein_min":2, "vein_max":12},
+		{"ore":Copper, "amount":tileCount/150, "vein_min":4, "vein_max":8}
 	]
 	
 	for ore in oreParams:

@@ -22,6 +22,7 @@ func updateSlots(inv, hbslot):
 				
 				slot.setCount(cell.count) 
 				slot.setItem(cell.item.icon)
+				slot.type = cell.item.type
 			
 			if row==0 and col==hbslot:
 				slot.setHighlight(true)

@@ -10,6 +10,8 @@ var inventory = []
 var hotbarslot = 0
 var selectedItem = null
 
+var stationRange = 3
+
 func _ready():
 	
 	#init inv (temp)
@@ -108,7 +110,7 @@ func handleInventory():
 			$CanvasLayer/Inventory.updateSlots(inventory, hotbarslot)
 	
 	if Input.is_action_just_pressed("scrolldown"):
-		hotbarslot = (hotbarslot + 1)%10
+		hotbarslot = (hotbarslot + 1)%9
 		$CanvasLayer/Inventory.updateSlots(inventory, hotbarslot)
 	elif Input.is_action_just_pressed("scrollup"):
 		hotbarslot-=1
@@ -119,6 +121,10 @@ func handleInventory():
 	#INVENTORY
 	if Input.is_action_just_pressed("Inventory"):
 		$CanvasLayer/Inventory.toggleInventory()
+		if selectedItem != null:
+			for x in range(selectedItem.count):
+				addItem(selectedItem.item.type, selectedItem.item is TileItem)
+			selectedItem = null
 		$CanvasLayer/Inventory.updateSlots(inventory, hotbarslot)
 	
 	if selectedItem != null:
@@ -128,6 +134,9 @@ func handleInventory():
 		$CanvasLayer/InventorySlot.clear()
 	$CanvasLayer/InventorySlot.position = get_viewport().get_mouse_position()
 	
+	#CRAFTING
+	if Input.is_action_just_pressed("Crafting"):
+		$CanvasLayer/Crafting.toggleCrafting()
 
 func _physics_process(delta):
 	movement(delta)
@@ -164,4 +173,7 @@ func addItem(type, tileItem):
 			"count":1
 		}
 	
+	$CanvasLayer/Inventory.updateSlots(inventory, hotbarslot)
+
+func refreshInventory():
 	$CanvasLayer/Inventory.updateSlots(inventory, hotbarslot)

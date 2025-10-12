@@ -7,3 +7,4 @@ func _init():
 	strength = 1
 	speed = 0.5
 	reach = 200
+	type="BasicShovel"
