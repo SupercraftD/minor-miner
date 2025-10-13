@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bryd0o46d8hmb"]
+
+[ext_resource type="Texture2D" uid="uid://doi6tf3iq27ni" path="res://assets/copperdagger.png" id="1_snh4o"]
+[ext_resource type="Script" uid="uid://cwcuyphjl8nin" path="res://projectiles/projectile.gd" id="1_u53jc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_snh4o"]
+size = Vector2(6, 30)
+
+[node name="CopperDaggerProjectile" type="Area2D"]
+script = ExtResource("1_u53jc")
+
+[node name="Copperdagger" type="Sprite2D" parent="."]
+texture_filter = 1
+rotation = 1.5707964
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_snh4o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_snh4o")

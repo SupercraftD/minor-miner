@@ -12,7 +12,8 @@ var typeToTile = {
 var typeToItem = {
 	"Basic Shovel":BasicShovel,
 	"Copper Ingot":CopperIngot,
-	"Copper Shovel":CopperShovel
+	"Copper Shovel":CopperShovel,
+	"Copper Dagger":CopperDagger
 }
 
 var craftingRecipes = {
@@ -65,5 +66,17 @@ var craftingRecipes = {
 		],
 		"station":"Copper Anvil",
 		"count":1
-	}
+	},
+	"Copper Dagger":{
+		"tileItem":false,
+		"requires":[
+			{
+				"type":"Copper Ingot",
+				"count":10,
+				"tileItem":false
+			}
+		],
+		"station":"Copper Anvil",
+		"count":1
+	},
 }

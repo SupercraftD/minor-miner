@@ -12,6 +12,8 @@ var selectedItem = null
 
 var stationRange = 3
 
+var toolUsingDirection = ""
+
 func _ready():
 	
 	#init inv (temp)
@@ -23,6 +25,7 @@ func _ready():
 		"item":BasicShovel.new(),
 		"count":1
 	}
+	addItem("Copper Dagger",false)
 	
 	$CanvasLayer/Inventory.updateSlots(inventory, hotbarslot)
 
@@ -47,7 +50,7 @@ func movement(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 	
-	$Minor.flip_h = velocity.x < 0 if velocity.x!=0 else $Minor.flip_h
+	$Minor.flip_h = (velocity.x < 0 if velocity.x!=0 else $Minor.flip_h) if toolUsingDirection=="" else toolUsingDirection=="left"
 	
 	move_and_slide()
 
@@ -62,10 +65,20 @@ func useItem():
 			using = selectedItem
 		
 		if using != null:
+			
+			if get_global_mouse_position().x < global_position.x:
+				toolUsingDirection = "left"
+			else:
+				toolUsingDirection = "right"
+			$Minor.flip_h = toolUsingDirection == "left"
+			
 			var db = using.item.use(get_global_mouse_position(), self, get_parent())
 			
 			if (db != 0):
 				useItemAnimation(db, using.item)
+				
+
+				
 
 			if using.item.consumable and db!=0:
 				using.count -= 1
@@ -100,6 +113,7 @@ func useItemAnimation(db, item):
 		a = $ItemAnimLeft
 	
 	await a.play(item, db*0.75)
+	toolUsingDirection = ""
 
 func handleInventory():
 	
@@ -177,3 +191,9 @@ func addItem(type, tileItem):
 
 func refreshInventory():
 	$CanvasLayer/Inventory.updateSlots(inventory, hotbarslot)
+
+func getHand(left):
+	if left:
+		return $ItemAnimLeft
+	else:
+		return $ItemAnimRight
