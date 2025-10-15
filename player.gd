@@ -14,6 +14,14 @@ var stationRange = 3
 
 var toolUsingDirection = ""
 
+var maxhp = 100
+var hp = maxhp
+var maxiframes = 20
+var iframes =0
+
+var maxKB = 500
+var appliedKb = Vector2()
+
 func _ready():
 	
 	#init inv (temp)
@@ -21,11 +29,9 @@ func _ready():
 		inventory.append([])
 		for col in range(9):
 			inventory[-1].append(null)
-	inventory[0][0] = {
-		"item":BasicShovel.new(),
-		"count":1
-	}
-	addItem("Copper Dagger",false)
+	addItem("Basic Shovel", false)
+	addItem("Debug Wand", false)
+	addItem("Copper Dagger", false)
 	
 	$CanvasLayer/Inventory.updateSlots(inventory, hotbarslot)
 
@@ -52,6 +58,8 @@ func movement(delta):
 	
 	$Minor.flip_h = (velocity.x < 0 if velocity.x!=0 else $Minor.flip_h) if toolUsingDirection=="" else toolUsingDirection=="left"
 	
+	velocity += appliedKb.clamp(Vector2(-maxKB,-maxKB), Vector2(maxKB,maxKB))
+	appliedKb = appliedKb.move_toward(Vector2(),150)
 	move_and_slide()
 
 var usageDb = false
@@ -153,9 +161,13 @@ func handleInventory():
 		$CanvasLayer/Crafting.toggleCrafting()
 
 func _physics_process(delta):
+	
+	iframes -= 1
 	movement(delta)
 	handleInventory()
 	useItem()
+	handleHpBar()
+	
 
 func addItem(type, tileItem):
 	var firstEmpty = Vector2i(-1,-1)
@@ -197,3 +209,21 @@ func getHand(left):
 		return $ItemAnimLeft
 	else:
 		return $ItemAnimRight
+
+func hit(dmg : float, kb : Vector2):
+	if iframes <= 0:
+		hp -= dmg
+		appliedKb += kb
+		appliedKb = appliedKb.clamp(Vector2(-maxKB,-maxKB), Vector2(maxKB, maxKB))
+		
+		if hp <= 0:
+			onDeath()
+		iframes = maxiframes
+
+func handleHpBar():
+	var hpbar = $CanvasLayer/HPBar
+	hpbar.max_value = maxhp
+	hpbar.value = hp
+
+func onDeath():
+	print("oh no")

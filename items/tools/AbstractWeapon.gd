@@ -6,6 +6,8 @@ var dmg = 10
 var reach = 10
 var speed = 0.25
 
+var kb = 10
+
 var projectileSpeed = 200
 
 func _init():

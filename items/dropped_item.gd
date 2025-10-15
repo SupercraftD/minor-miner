@@ -10,6 +10,8 @@ func _init(pType, pWorld : Node2D, gPos, isTile):
 	iScene.type = type
 	iScene.isTile = isTile
 	
-	iScene.get_node("Sprite2D").texture = GlobalData.typeToTile[type].icon
-	
+	if isTile:
+		iScene.get_node("Sprite2D").texture = GlobalData.typeToTile[type].icon
+	else:
+		iScene.get_node("Sprite2D").texture = GlobalData.typeToItem[type].icon
 	pWorld.add_child(iScene)

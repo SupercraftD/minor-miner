@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=3 uid="uid://ttoxt55tq28v"]
+
+[ext_resource type="Texture2D" uid="uid://c1syf6dq5xo6m" path="res://assets/slime.png" id="1_6ftag"]
+[ext_resource type="Script" uid="uid://da01x6ys0828q" path="res://enemies/slime.gd" id="1_qtm3c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qtm3c"]
+size = Vector2(559, 281)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qtm3c"]
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n1ijq"]
+bg_color = Color(0.6, 0.041007042, 0.20001638, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[node name="Slime" type="CharacterBody2D" node_paths=PackedStringArray("hitbox", "hpbar")]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_qtm3c")
+hitbox = NodePath("Area2D")
+hpbar = NodePath("ProgressBar")
+
+[node name="Slime" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -16)
+texture = ExtResource("1_6ftag")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-32, 15, -29, -2, -13, -17, 10, -17, 28, -2, 31, 15)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_qtm3c")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+visible = false
+offset_left = -43.0
+offset_top = -26.0
+offset_right = 44.0
+offset_bottom = -21.0
+theme_override_styles/background = SubResource("StyleBoxFlat_qtm3c")
+theme_override_styles/fill = SubResource("StyleBoxFlat_n1ijq")
+show_percentage = false
+
+[node name="hurtbox" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="hurtbox"]
+polygon = PackedVector2Array(-33, 15, -29, -4, -13, -18, 11, -18, 27, -3, 31, 16)

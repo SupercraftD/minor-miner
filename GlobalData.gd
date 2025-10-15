@@ -13,7 +13,9 @@ var typeToItem = {
 	"Basic Shovel":BasicShovel,
 	"Copper Ingot":CopperIngot,
 	"Copper Shovel":CopperShovel,
-	"Copper Dagger":CopperDagger
+	"Copper Dagger":CopperDagger,
+	"Debug Wand":DebugWand,
+	"Gel":Gel
 }
 
 var craftingRecipes = {

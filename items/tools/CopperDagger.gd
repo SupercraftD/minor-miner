@@ -12,4 +12,5 @@ func _init():
 	dmg = 10
 	reach = 100
 	speed = 0.5
-	projectileSpeed = 10
+	projectileSpeed = 15
+	kb = 250

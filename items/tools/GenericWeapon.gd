@@ -13,5 +13,6 @@ func spawnProjectile(player) -> Projectile:
 	p.speed = projectileSpeed
 	p.piercing = piercing
 	p.shooter = player
+	p.kb = kb
 	
 	return p

@@ -4,12 +4,13 @@ var shooter
 
 var reach : float
 var dmg : float
+var kb : float
 var speed : float
 
 var piercing : bool
 
 var dist = 0
-func _physics_process(delta):
+func _physics_process(_delta):
 	dist += Vector2(speed,0).rotated(global_rotation).length()
 	position += Vector2(speed,0).rotated(global_rotation)
 	
@@ -23,6 +24,8 @@ func _physics_process(delta):
 				#TODO ADD HIT LOGIC
 				#TODO ADD PARTICLE LOGIC
 				
+				if i is Enemy:
+					i.hit(dmg, global_position.direction_to(i.global_position)*kb)
 				
 				if not piercing or i is TileMapLayer:
 					queue_free()

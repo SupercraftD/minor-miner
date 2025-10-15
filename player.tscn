@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cjwes3lavbpmv"]
+[gd_scene load_steps=12 format=3 uid="uid://cjwes3lavbpmv"]
 
 [ext_resource type="Texture2D" uid="uid://c464nds1ix22y" path="res://assets/minor.png" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://dw8xbh647pwoy" path="res://player.gd" id="1_onrkg"]
@@ -24,7 +24,22 @@ corner_radius_top_right = 25
 corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2hs0m"]
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1jxqw"]
+bg_color = Color(1, 0, 0.14118576, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
+collision_layer = 5
+collision_mask = 5
 script = ExtResource("1_onrkg")
 
 [node name="Minor" type="Sprite2D" parent="."]
@@ -368,6 +383,15 @@ offset_left = 68.0
 offset_top = -14.0
 offset_right = 67.0
 offset_bottom = 18.0
+
+[node name="HPBar" type="ProgressBar" parent="CanvasLayer"]
+offset_left = 11.0
+offset_top = 605.0
+offset_right = 507.0
+offset_bottom = 632.0
+theme_override_styles/background = SubResource("StyleBoxFlat_2hs0m")
+theme_override_styles/fill = SubResource("StyleBoxFlat_1jxqw")
+show_percentage = false
 
 [node name="ItemAnimRight" parent="." instance=ExtResource("5_sweqy")]
 position = Vector2(24, -2)

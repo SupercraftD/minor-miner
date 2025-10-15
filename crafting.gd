@@ -123,9 +123,10 @@ func canCraft(i):
 		for x in range(pos.x - player.stationRange, pos.x + player.stationRange + 1):
 			for y in range(pos.y - player.stationRange, pos.y + player.stationRange + 1):
 				var spot = Vector2i(x,y)
-				if worldDat[spot].type == GlobalData.craftingRecipes[i].station:
-					stationInRange=true
-					break
+				if worldDat.has(spot):
+					if worldDat[spot].type == GlobalData.craftingRecipes[i].station:
+						stationInRange=true
+						break
 	
 	return (not uncraftable) and stationInRange
 
