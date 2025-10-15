@@ -58,8 +58,9 @@ func movement(delta):
 	
 	$Minor.flip_h = (velocity.x < 0 if velocity.x!=0 else $Minor.flip_h) if toolUsingDirection=="" else toolUsingDirection=="left"
 	
-	velocity += appliedKb.clamp(Vector2(-maxKB,-maxKB), Vector2(maxKB,maxKB))
-	appliedKb = appliedKb.move_toward(Vector2(),150)
+	if appliedKb != Vector2.ZERO:
+		velocity = appliedKb.clamp(Vector2(-maxKB,-maxKB), Vector2(maxKB,maxKB))
+		appliedKb = appliedKb.move_toward(Vector2(),100)
 	move_and_slide()
 
 var usageDb = false
@@ -84,6 +85,8 @@ func useItem():
 			
 			if (db != 0):
 				useItemAnimation(db, using.item)
+			else:
+				toolUsingDirection = ""
 				
 
 				
