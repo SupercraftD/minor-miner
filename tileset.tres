@@ -1,10 +1,11 @@
-[gd_resource type="TileSet" load_steps=11 format=3 uid="uid://cj442exspxk5e"]
+[gd_resource type="TileSet" load_steps=13 format=3 uid="uid://cj442exspxk5e"]
 
 [ext_resource type="Texture2D" uid="uid://cd1eniu4l38ie" path="res://assets/stone.png" id="1_2urvg"]
 [ext_resource type="Texture2D" uid="uid://cs6ocnwoju236" path="res://assets/coal.png" id="2_ej02t"]
 [ext_resource type="Texture2D" uid="uid://iuq72w2pfvnu" path="res://assets/copper.png" id="3_14fb3"]
 [ext_resource type="Texture2D" uid="uid://dtrpvvuwg4dlr" path="res://assets/furnace.png" id="4_p0366"]
 [ext_resource type="Texture2D" uid="uid://coj0gn4mf5hyc" path="res://assets/copperanvil.png" id="5_hobn4"]
+[ext_resource type="Texture2D" uid="uid://dhx1rd86tlh88" path="res://assets/slimetile.png" id="6_mjrc7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tlwt5"]
 texture = ExtResource("1_2urvg")
@@ -36,6 +37,12 @@ texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -6.7736893, 32, -7.9026337, 32, 32, -32, 32)
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7y6if"]
+texture = ExtResource("6_mjrc7")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+
 [resource]
 tile_size = Vector2i(64, 64)
 physics_layer_0/collision_layer = 3
@@ -45,3 +52,4 @@ sources/1 = SubResource("TileSetAtlasSource_14fb3")
 sources/2 = SubResource("TileSetAtlasSource_p0366")
 sources/3 = SubResource("TileSetAtlasSource_hobn4")
 sources/4 = SubResource("TileSetAtlasSource_mjrc7")
+sources/5 = SubResource("TileSetAtlasSource_7y6if")

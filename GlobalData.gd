@@ -6,7 +6,8 @@ var typeToTile = {
 	"Coal":Coal,
 	"Copper":Copper,
 	"Furnace":Furnace,
-	"Copper Anvil":CopperAnvil
+	"Copper Anvil":CopperAnvil,
+	"Slime Block":SlimeBlock
 }
 
 var typeToItem = {
@@ -81,4 +82,16 @@ var craftingRecipes = {
 		"station":"Copper Anvil",
 		"count":1
 	},
+	"Slime Block":{
+		"tileItem":true,
+		"requires":[
+			{
+				"type":"Gel",
+				"count":2,
+				"tileItem":false
+			}
+		],
+		"station":"",
+		"count":1
+	}
 }
