@@ -43,14 +43,17 @@ func refreshMenu():
 		shownRecipes.push_back(item)
 		
 		var tex 
+		var tt
 		if GlobalData.craftingRecipes[item].tileItem:
 			tex = GlobalData.typeToTile[item].icon
+			tt=GlobalData.typeToTile[item].tooltip
 		else:
 			tex = GlobalData.typeToItem[item].icon
+			tt=GlobalData.typeToItem[item].tooltip
 		
 		if GlobalData.craftingRecipes[item].count != 1:
 			slot.setCount(GlobalData.craftingRecipes[item].count)
-		
+		slot.tooltip = tt
 		slot.setItem(tex)
 		slot.type = item
 	
@@ -160,14 +163,18 @@ func selectRecipe(idx):
 		$Panel/Requires/HBoxContainer.add_child(slot)
 		
 		var tex 
+		var tt
 		if item.tileItem:
 			tex = GlobalData.typeToTile[item.type].icon
+			tt=GlobalData.typeToTile[item.type].tooltip
 		else:
 			tex = GlobalData.typeToItem[item.type].icon
+			tt=GlobalData.typeToTile[item.type].tooltip
 		
 		slot.setItem(tex)
 		slot.type = item.type
 		slot.setCount(item.count)
+		slot.tooltip = tt
 	
 	if GlobalData.craftingRecipes[selectedRecipe].station != "":
 		$Panel/Label2/InventorySlot.setItem(GlobalData.typeToTile[GlobalData.craftingRecipes[selectedRecipe].station].icon)

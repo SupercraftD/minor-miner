@@ -1,6 +1,7 @@
 class_name Gel extends Item
 
 static var icon = preload("res://assets/gel.png")
+static var tooltip = "Material\n\"Doesn't look too flammable\""
 
 func _init():
 	consumable = false

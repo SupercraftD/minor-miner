@@ -2,6 +2,7 @@ class_name InventoryUISlot extends Control
 
 @export var transparentbg = false
 var type : String = ""
+var tooltip : String
 
 var pos = Vector2i(-1,-1)
 
@@ -24,10 +25,21 @@ func clear():
 func setHighlight(hl):
 	$Panel2.visible = hl
 
-func _process(delta):
+var hovering = false
+
+func _process(_delta):
+	
+	var cv = get_parent()
+	while not (cv is CanvasLayer):
+		cv = cv.get_parent()
+	
+	var tt = cv.get_node("tooltip")
+	
 	if Rect2(global_position, size).has_point(get_viewport().get_mouse_position()) and type != "":
-		$nametooltip.visible = true
-		$nametooltip.text = type
-		$nametooltip.global_position = get_global_mouse_position() + Vector2(15,0)
-	else:
-		$nametooltip.visible = false
+		tt.setText("[b]"+type+"[/b]"+"\n"+tooltip)
+		if not hovering:
+			tt.hc += 1
+			hovering=true
+	elif hovering:
+		tt.hc-=1
+		hovering=false

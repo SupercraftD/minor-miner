@@ -1,7 +1,7 @@
 class_name DebugWand extends Item
 
 static var icon = preload("res://assets/crack3.png")
-
+static var tooltip = "Spawns slimes"
 static var slime = preload("res://enemies/slime.tscn")
 
 func _init():

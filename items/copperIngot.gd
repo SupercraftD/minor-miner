@@ -1,6 +1,7 @@
 class_name CopperIngot extends Item
 
 static var icon = preload("res://assets/copperingot.png")
+static var tooltip = "Material"
 
 func _init():
 	consumable = false
