@@ -169,7 +169,7 @@ func selectRecipe(idx):
 			tt=GlobalData.typeToTile[item.type].tooltip
 		else:
 			tex = GlobalData.typeToItem[item.type].icon
-			tt=GlobalData.typeToTile[item.type].tooltip
+			tt=GlobalData.typeToItem[item.type].tooltip
 		
 		slot.setItem(tex)
 		slot.type = item.type
